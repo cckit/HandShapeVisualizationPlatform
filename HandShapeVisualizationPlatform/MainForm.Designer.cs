@@ -186,6 +186,7 @@
 			this.chartTrajectory.Legends.Add(legend1);
 			this.chartTrajectory.Location = new System.Drawing.Point(562, 274);
 			this.chartTrajectory.Name = "chartTrajectory";
+			this.chartTrajectory.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
 			series1.ChartArea = "charAreaLayer12";
 			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Radar;
 			series1.CustomProperties = "RadarDrawingStyle=Line, EmptyPointValue=Zero";
