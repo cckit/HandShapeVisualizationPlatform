@@ -34,13 +34,12 @@ namespace HandShapeVisualizationPlatform {
 
 		private void updateChart() {
 			DataTable tableHandShape = dataSetModel.DataSet.Tables["HandShape"];
+			Series series = chartHandshape.Series[0];
+			int maximumIndex = 0;
+			series.Points.Clear();
 
-			for(int i=0; i<chartHandshape.Series.Count; i++) {
-				Series series = chartHandshape.Series[i];
-				series.Points.Clear();
-
-				foreach(DataRow r in tableHandShape.Rows) {
-					DataPoint point = new DataPoint(0D, new double[] { 
+			foreach(DataRow r in tableHandShape.Rows) {
+				DataPoint point = new DataPoint(0D, new double[] { 
 						Convert.ToDouble(r["Lower whisker"]), 
 						Convert.ToDouble(r["Upper whisker"]), 
 						Convert.ToDouble(r["Lower box"]), 
@@ -48,8 +47,7 @@ namespace HandShapeVisualizationPlatform {
 						Convert.ToDouble(r["Current"]), 
 						Convert.ToDouble(r["Average"])
 					});
-					series.Points.Add(point);
-				}
+				series.Points.Add(point);
 			}
 		}
 	}
