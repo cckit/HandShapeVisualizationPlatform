@@ -36,9 +36,11 @@ namespace HandShapeVisualizationPlatform {
 			DataTable tableHandShape = dataSetModel.DataSet.Tables["HandShape"];
 			Series series = chartHandshape.Series[0];
 			int maximumIndex = 0;
+			double maximumValue = -1.0D;
 			series.Points.Clear();
 
-			foreach(DataRow r in tableHandShape.Rows) {
+			for(int i = 0; i < tableHandShape.Rows.Count; i++) {
+				DataRow r = tableHandShape.Rows[i];
 				DataPoint point = new DataPoint(0D, new double[] { 
 						Convert.ToDouble(r["Lower whisker"]), 
 						Convert.ToDouble(r["Upper whisker"]), 
@@ -48,6 +50,15 @@ namespace HandShapeVisualizationPlatform {
 						Convert.ToDouble(r["Average"])
 					});
 				series.Points.Add(point);
+
+				if(Convert.ToDouble(r["Current"]) > maximumValue) {
+					maximumIndex = i;
+					maximumValue = Convert.ToDouble(r["Current"]);
+				}
+			}
+
+			if(tableHandShape.Rows.Count > 0) {
+				series.Points[maximumIndex].Color = Color.Red;
 			}
 		}
 	}
