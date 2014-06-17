@@ -20,8 +20,6 @@ namespace HandShapeVisualizationPlatform {
 	public class RandomDataSetModel : AbstractDataSetModel {
 
 		private const int HAND_SHAPE_COUNT = 15;
-		private const int TRAJECTORY_COUNT = 8;
-		private const int TRAJECTORY_LAYER = 3;
 
 		private int frameCount = 0;
 		private double[] Ms;
@@ -45,16 +43,21 @@ namespace HandShapeVisualizationPlatform {
 			Ss = new double[HAND_SHAPE_COUNT];
 
 			for(int i = 0; i < HAND_SHAPE_COUNT; i++) {
-				DataRow r = handShapeDataTable.NewRow();
-
 				handShapeDataTable.Rows.Add(handShapeDataTable.NewRow());
 			}
 
+
 			DataTable trajectoryDataTable = DataSet.Tables.Add("Trajectory");
-			for(int i = 0; i < TRAJECTORY_LAYER; i++) {
-				for(int j = 0; j < TRAJECTORY_COUNT; j++) {
-					trajectoryDataTable.Columns.Add(i + " " + j);
-				}
+			trajectoryDataTable.Columns.Add("All");
+			trajectoryDataTable.Columns.Add("1st Half");
+			trajectoryDataTable.Columns.Add("2nd Half");
+			trajectoryDataTable.Columns.Add("1st Quarter");
+			trajectoryDataTable.Columns.Add("2nd Quarter");
+			trajectoryDataTable.Columns.Add("3rd Quarter");
+			trajectoryDataTable.Columns.Add("4th Quarter");
+
+			for(int i = 0; i < 8; i++) {
+				trajectoryDataTable.Rows.Add(trajectoryDataTable.NewRow());
 			}
 		}
 
@@ -64,7 +67,6 @@ namespace HandShapeVisualizationPlatform {
 
 		public override void update() {
 			DataTable handShapeDataTable = DataSet.Tables["HandShape"];
-			DataTable trajectoryDataTable = DataSet.Tables["Trajectory"];
 			Random random = new Random();
 			double total = 0.0D;
 
@@ -111,6 +113,24 @@ namespace HandShapeVisualizationPlatform {
 			}
 
 			handShapeDataTable.AcceptChanges();
+
+
+			DataTable trajectoryDataTable = DataSet.Tables["Trajectory"];
+			for(int c = 0; c < trajectoryDataTable.Columns.Count; c++) {
+				total = 0.0D;
+
+				foreach(DataRow row in trajectoryDataTable.Rows){
+					double d = random.NextDouble();
+					row[c] = d;
+					total += d;
+				}
+
+				foreach(DataRow row in trajectoryDataTable.Rows) {
+					row[c] = Convert.ToDouble(row[c]) / total;
+				}
+			}
+
+			trajectoryDataTable.AcceptChanges();
 		}
 	}
 }

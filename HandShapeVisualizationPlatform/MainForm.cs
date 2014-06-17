@@ -60,6 +60,18 @@ namespace HandShapeVisualizationPlatform {
 			if(tableHandShape.Rows.Count > 0) {
 				series.Points[maximumIndex].Color = Color.Red;
 			}
+
+
+			DataTable tableTrajectory = dataSetModel.DataSet.Tables["Trajectory"];
+			for(int i = 0; i < chartTrajectory.Series.Count-1; i++) {
+				series = chartTrajectory.Series[i];
+				series.Points.Clear();
+
+				foreach(DataRow r in tableTrajectory.Rows) {
+					string xValue = Convert.ToString(tableTrajectory.Rows[tableTrajectory.Rows.Count-1]);
+					series.Points.AddXY(xValue, r[i]);
+				}
+			}
 		}
 	}
 }
