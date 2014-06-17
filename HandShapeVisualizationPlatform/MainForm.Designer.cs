@@ -186,10 +186,18 @@
 			this.chartTrajectory.Legends.Add(legend1);
 			this.chartTrajectory.Location = new System.Drawing.Point(562, 274);
 			this.chartTrajectory.Name = "chartTrajectory";
-			this.chartTrajectory.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
+			this.chartTrajectory.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+			this.chartTrajectory.PaletteCustomColors = new System.Drawing.Color[] {
+        System.Drawing.Color.Red,
+        System.Drawing.Color.Lime,
+        System.Drawing.Color.Blue,
+        System.Drawing.Color.Red,
+        System.Drawing.Color.Lime,
+        System.Drawing.Color.Blue,
+        System.Drawing.Color.Fuchsia};
 			series1.ChartArea = "charAreaLayer12";
 			series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Radar;
-			series1.CustomProperties = "RadarDrawingStyle=Line, EmptyPointValue=Zero";
+			series1.CustomProperties = "EmptyPointValue=Zero";
 			series1.Legend = "Default";
 			series1.Name = "All";
 			series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
