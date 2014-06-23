@@ -73,5 +73,19 @@ namespace HandShapeVisualizationPlatform {
 				}
 			}
 		}
+
+		private void checkedListBoxFeatureVector_ItemCheck(object sender, ItemCheckEventArgs e) {
+			if(e.NewValue == CheckState.Checked) {
+				if(checkedListBoxFeatureVector.CheckedIndices.Count == 1) {
+					btnCompare.Enabled = true;
+				}
+
+				if(checkedListBoxFeatureVector.CheckedIndices.Count > 1) {
+					e.NewValue = e.CurrentValue;
+				}
+			} else if(e.NewValue == CheckState.Unchecked) {
+				btnCompare.Enabled = false;
+			}
+		}
 	}
 }
