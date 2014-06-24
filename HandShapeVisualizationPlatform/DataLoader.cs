@@ -24,8 +24,11 @@ namespace HandShapeVisualizationPlatform {
 	public class DataLoader {
 
 		public static DataTable loadFromCSV(string pathName, bool isHeader) {
-			DataTable table = new DataTable();
-			using(CachedCsvReader csv = new CachedCsvReader (new StreamReader(pathName), false)) {
+			return loadFromCSV(pathName, isHeader, new DataTable());
+		}
+
+		public static DataTable loadFromCSV(string pathName, bool isHeader, DataTable table) {
+			using(CachedCsvReader csv = new CachedCsvReader(new StreamReader(pathName), false)) {
 				table.Load(csv);
 			}
 			return table;

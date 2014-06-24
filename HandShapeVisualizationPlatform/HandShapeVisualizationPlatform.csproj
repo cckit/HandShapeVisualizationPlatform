@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractDataSetModel.cs" />
+    <Compile Include="CSVDataSetModel.cs" />
     <Compile Include="DataLoader.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

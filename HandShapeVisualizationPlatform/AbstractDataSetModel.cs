@@ -27,7 +27,9 @@ namespace HandShapeVisualizationPlatform {
 
 		public AbstractDataSetModel() {
 			dataSet = new DataSet();
+		}
 
+		public void start() {
 			loadRawData();
 			initDataSet();
 			update();

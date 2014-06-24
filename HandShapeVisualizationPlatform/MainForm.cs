@@ -21,9 +21,7 @@ namespace HandShapeVisualizationPlatform {
 
 		private void MainForm_Load(object sender, EventArgs e) {
 			dataSetModel = new RandomDataSetModel();
-
-			//chartHandshape.DataBindTable(((System.ComponentModel.IListSource)dataSetModel.DataSet.Tables["HandShape"]).GetList());
-
+			dataSetModel.start();
 			dataSetModel.update();
 			updateChart();
 		}
@@ -98,12 +96,10 @@ namespace HandShapeVisualizationPlatform {
 
 			if(openFileDialog.ShowDialog() == DialogResult.OK) {
 				string pathName = openFileDialog.FileName;
-				DataTable table = DataLoader.loadFromCSV(pathName, false);
-				Console.WriteLine("Row: " + table.Rows.Count + "\tCol: " + table.Columns.Count);
+				CSVDataSetModel csv = new CSVDataSetModel(pathName);
+				csv.start();
 
-				table.Columns[0].ColumnName = "Class";
-
-				((ListBox)checkedListBoxFeatureVector).DataSource = table;
+				((ListBox)checkedListBoxFeatureVector).DataSource = csv.getRawDataTable();
 				((ListBox)checkedListBoxFeatureVector).DisplayMember = "Class";
 			}
 		}
