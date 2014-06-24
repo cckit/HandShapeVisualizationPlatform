@@ -21,6 +21,18 @@ namespace HandShapeVisualizationPlatform {
 
 		string pathName;
 
+		private int givenDataIndex = -1;
+		public int GivenDataIndex {
+			get { return givenDataIndex; }
+			set { this.givenDataIndex = value; }
+		}
+
+		private int compareDataIndex = -1;
+		public int CompareDataIndex {
+			get { return compareDataIndex; }
+			set { this.compareDataIndex = value; }
+		}
+
 		private const string RAW_DATA_TABLE_NAME = "Raw Data Table";
 
 		public CSVDataSetModel(string pathName) {

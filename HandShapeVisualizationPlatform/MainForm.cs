@@ -14,6 +14,7 @@ namespace HandShapeVisualizationPlatform {
 	public partial class MainForm : Form {
 
 		private RandomDataSetModel dataSetModel;
+		private CSVDataSetModel csv;
 
 		public MainForm() {
 			InitializeComponent();
@@ -96,11 +97,20 @@ namespace HandShapeVisualizationPlatform {
 
 			if(openFileDialog.ShowDialog() == DialogResult.OK) {
 				string pathName = openFileDialog.FileName;
-				CSVDataSetModel csv = new CSVDataSetModel(pathName);
+				csv = new CSVDataSetModel(pathName);
 				csv.start();
 
 				((ListBox)checkedListBoxFeatureVector).DataSource = csv.getRawDataTable();
 				((ListBox)checkedListBoxFeatureVector).DisplayMember = "Class";
+			}
+		}
+
+		private void btnCompare_Click(object sender, EventArgs e) {
+			if(csv != null) {
+				CheckedListBox.CheckedIndexCollection col = checkedListBoxFeatureVector.CheckedIndices;
+				csv.GivenDataIndex = col[0];
+				csv.CompareDataIndex = col[1];
+				csv.update();
 			}
 		}
 	}

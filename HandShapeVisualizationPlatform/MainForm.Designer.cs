@@ -487,6 +487,7 @@
 			this.btnCompare.TabIndex = 2;
 			this.btnCompare.Text = "Compare";
 			this.btnCompare.UseVisualStyleBackColor = true;
+			this.btnCompare.Click += new System.EventHandler(this.btnCompare_Click);
 			// 
 			// MainForm
 			// 
