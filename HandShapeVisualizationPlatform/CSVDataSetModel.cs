@@ -21,19 +21,19 @@ namespace HandShapeVisualizationPlatform {
 
 		string pathName;
 
-		private const string rawDataTableName = "Raw Data Table";
+		private const string RAW_DATA_TABLE_NAME = "Raw Data Table";
 
 		public CSVDataSetModel(string pathName) {
 			this.pathName = pathName;
 		}
 
 		public override void loadRawData() {
-			DataLoader.loadFromCSV(pathName, false, DataSet.Tables.Add(rawDataTableName));
-			Console.WriteLine("Row: " + DataSet.Tables[rawDataTableName].Rows.Count + "\tCol: " + DataSet.Tables[rawDataTableName].Columns.Count);
+			DataLoader.loadFromCSV(pathName, false, DataSet.Tables.Add(RAW_DATA_TABLE_NAME));
+			Console.WriteLine("Row: " + DataSet.Tables[RAW_DATA_TABLE_NAME].Rows.Count + "\tCol: " + DataSet.Tables[RAW_DATA_TABLE_NAME].Columns.Count);
 		}
 
 		public override void initDataSet() {
-			DataSet.Tables[rawDataTableName].Columns[0].ColumnName = "Class";
+			DataSet.Tables[RAW_DATA_TABLE_NAME].Columns[0].ColumnName = "Class";
 		}
 
 		public override void update() {
@@ -41,7 +41,7 @@ namespace HandShapeVisualizationPlatform {
 		}
 
 		public DataTable getRawDataTable() {
-			return DataSet.Tables[rawDataTableName];
+			return DataSet.Tables[RAW_DATA_TABLE_NAME];
 		}
 	}
 }
