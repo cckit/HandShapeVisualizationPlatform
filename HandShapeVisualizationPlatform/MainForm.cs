@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -85,6 +86,25 @@ namespace HandShapeVisualizationPlatform {
 				}
 			} else if(e.NewValue == CheckState.Unchecked) {
 				btnCompare.Enabled = false;
+			}
+		}
+
+		private void btnLoadData_Click(object sender, EventArgs e) {
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+
+			openFileDialog.Title = "Load Data";
+			openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+			openFileDialog.Filter = "CSV files(*.csv)|*.csv";
+
+			if(openFileDialog.ShowDialog() == DialogResult.OK) {
+				string pathName = openFileDialog.FileName;
+				DataTable table = DataLoader.loadFromCSV(pathName, false);
+				Console.WriteLine("Row: " + table.Rows.Count + "\tCol: " + table.Columns.Count);
+
+				table.Columns[0].ColumnName = "Class";
+
+				((ListBox)checkedListBoxFeatureVector).DataSource = table;
+				((ListBox)checkedListBoxFeatureVector).DisplayMember = "Class";
 			}
 		}
 	}
