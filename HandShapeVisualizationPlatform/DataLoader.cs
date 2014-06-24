@@ -24,21 +24,6 @@ namespace HandShapeVisualizationPlatform {
 	public class DataLoader {
 
 		public static DataTable loadFromCSV(string pathName, bool isHeader) {
-			/*string path = Path.GetDirectoryName(pathName);
-			string fileName = Path.GetFileName(pathName);
-			string sql = @"SELECT * FROM [" + fileName + "]";
-
-			using(OleDbConnection connection = new OleDbConnection(
-			  @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + path +
-			  ";Extended Properties=\"Text;HDR=" + (isHeader ? "Yes" : "No") + "\""))
-			using(OleDbCommand command = new OleDbCommand(sql, connection))
-			using(OleDbDataAdapter adapter = new OleDbDataAdapter(command)) {
-				DataTable dataTable = new DataTable();
-				dataTable.Locale = CultureInfo.CurrentCulture;
-				adapter.Fill(dataTable);
-				return dataTable;
-			}*/
-
 			DataTable table = new DataTable();
 			using(CachedCsvReader csv = new CachedCsvReader (new StreamReader(pathName), false)) {
 				table.Load(csv);
